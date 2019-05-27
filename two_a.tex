@@ -1,0 +1,33 @@
+\section{(2.a)}
+
+In order to generate the fourier plane with the desired symmetry, we have used two matrices, each having 'real' elements that are normaly distributed.\\
+We show each complex element of the fourier plane as $a+ib$.\\
+The matrix having the values of $a_{kx,ky}$ is thus, symmetric. We can also easily show that the matrix having the values $b_{kx,ky}$ is anti-symmetric.\\
+The values of k are in the range $(-512, 512)$. In order to avoid $\sigma = inf$ for k=(0,0), we have assigned a small but nonzero value to k.\\
+
+\lstinputlisting{two_a.py}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/fourier_2a_1.png}
+  \caption{The gaussian random field with n=-1}
+  \label{fig:fig5}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/fourier_2a_2.png}
+  \caption{The gaussian random field with n=-2}
+  \label{fig:fig6}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/fourier_2a_3.png}
+  \caption{The gaussian random field with n=-3}
+  \label{fig:fig7}
+\end{figure}
+
+In all the plots, the physical size of the axis is in the range (0-512)* scale . Here we have scale = 10 (Mpc).\\
+We know from the definition of the Nyquist critical frequency, that, increasing the scale would decrease the critical frequency. This itself means that
+ although we are sampling until $k_{max}=512$, we may get the effect of 'aliasing' in our results.

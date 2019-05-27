@@ -1,0 +1,18 @@
+\section{(1.b)}
+Using the Box-Muller method, we can generate two sets of normal-distributed random numbers, here defined as z1 and z2.\\
+As shown in Fig. 4, the generated data points match the gaussian distribution with good accuracy.\\
+The histogram is normalized to one and the orange line shows the normal distribution from scipy package.\\
+NOTE: Although the generated random numbers are within 0 and 1, in this section 
+I saw that sometimes logarithm of the random values are positive,
+which either means that the random generator is giving value bigger than 1, or the logarithm is doing something strange!
+
+\lstinputlisting{one_b.py}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.9\linewidth]{Plots/distribution_1b.png}
+  \caption{Normal distributed random numbers using Box-Muller method. the dashed lines show the 1-5 $\sigma$ intervals.}
+  \label{fig:fig4}
+\end{figure}
+
+

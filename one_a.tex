@@ -1,0 +1,31 @@
+\section{(1.a)}
+
+Following the book Numerical Recepies ( page 347-348) we can write a power2-base, MWC random generator.\\
+The value of A is chosen from the table in the book. mod b is equivalent to AND (b-1).\\
+As can be seen in Fig. 3,the random generator is not producing enough numbers around 0.
+I tried to solve the issue by giving unsigned integer for "a" and "shifting numbers" but I could not get the desired result.\\
+
+\lstinputlisting{one_a.py}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/scatt_1a.png}
+  \caption{The scatter plot of generated randoms for the first 1000 numbers.}
+  \label{fig:fig1}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/bar_1a.png}
+  \caption{The value of the random number for the first 1000 numbers.}
+  \label{fig:fig2}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{Plots/hist_1a.png}
+  \caption{The histogram of 1000000 random numbers in the bins of width 0.05.}
+  \label{fig:fig3}
+\end{figure}
+
+\clearpage
