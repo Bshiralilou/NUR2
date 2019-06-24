@@ -9,7 +9,7 @@ def rand( a= 2811536238 , b= 2**32):
     rand.current ^= rand.current << 4
     # MWC
     rand.current = a * (rand.current & (b - 1)) + (rand.current >> 32)
-    
+
     return rand.current/((a*b - 2))
 
 
@@ -21,19 +21,19 @@ print('the seed value of the random generator is:', rand.current)
 rands_scatt=[]
 for i in range(1000):
     rands_scatt.append( rand() )
-    
+
 plt.scatter( rands_scatt[0:998], rands_scatt[1:999], marker= '.' )
 plt.xlabel(r'$x_i$')
 plt.ylabel(r'$x_{i+1}$')
-plt.savefig('scatt_1a.png')
-plt.show()
+plt.savefig('./Plots/scatt_1a.png')
+#plt.show()
 plt.close()
 
 plt.bar(np.arange(0,1000), np.array(rands_scatt))
 plt.ylabel('random value')
 plt.xlabel('index of the number')
-plt.savefig('bar_1a.png')
-plt.show()
+plt.savefig('./Plots/bar_1a.png')
+#plt.show()
 plt.close()
 #----- generating the histogram plot
 
@@ -45,7 +45,7 @@ bins = np.arange(0,1.05,0.05)
 plt.hist( rands_hist, bins )
 plt.xlabel(r'$x_{random}$')
 plt.ylabel("frequency")
-plt.savefig('hist_1a.png')
-plt.show()
+plt.savefig('./Plots/hist_1a.png')
+#plt.show()
 plt.close()
 

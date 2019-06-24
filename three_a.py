@@ -33,18 +33,17 @@ a[6,5] = 11/84
 #----- the seccond order ODE
 def f(t,e,d):
     return (2/3)*d/t**2 - (4/3)*e/t
-	
 #----- Numerical integration
 def runge_kutta(D0, E0, t_i, t_f, h0, N_max=5000 ):
 
     D = np.array([D0])   # growth factor
     E = np.array([E0])   # derivative of the growth factor
     T = np.array([t_i])  # time steps
-    
+
 	#values of the parameter k for D and E equations.
-    kE = np.tile(np.nan , (6))  
+    kE = np.tile(np.nan , (6))
     kD = np.tile(np.nan , (6))
-    
+
     h = h0
     N = 0   #number of steps without change in step size
     M = 0   #number of steps with change in step size
@@ -53,45 +52,45 @@ def runge_kutta(D0, E0, t_i, t_f, h0, N_max=5000 ):
 
         kE[0] = h* f(T[-1], E[-1], D[-1])
         kD[0] = h* E[-1]
-        
-		# 12 lines of updating the values of kD and kE in just two lines! :D
+
+	# 12 lines of updating the values of kD and kE in just two lines! :D
         for i in range(1,6):
             kE[i] = h* f(T[-1] + h*c[i] , E[-1]+ np.sum(kE[:i] *a[i,:i]) , D[-1]+ np.sum(kD[:i] *a[i,:i]) )
             kD[i] = h* (E[-1]+ np.sum(kE[:i] *a[i,:i]))
-        
-		# calculating the solution at each time step
+
+	# calculating the solution at each time step
         D_new = D[-1] + np.sum( b[:6] * kD )
         E_new = E[-1] + np.sum( b[:6] * kE )
-		
-		#error estimation
+
+	#error estimation
         deltaE = np.absolute( np.sum( (b[:6]-b_star[:6]) * kE ) )
         deltaD = np.absolute( np.sum( (b[:6]-b_star[:6]) * kD ) )
-        
+
         atol = 0.
         rtol = 5e-3  #chosen such that the computation time be reasonable
         scaleD = atol + rtol * np.amax( np.array([D[-1], D_new]) )
         scaleE = atol + rtol * np.amax( np.array([E[-1], E_new]) )
-       
+
         err = np.sqrt( 0.5*( (deltaE/scaleE)**2 + (deltaD/scaleD)**2 ) )
-        
-		#checking for change in step size
+
+	#checking for change in step size
         if err <= 1.:
             N += 1
             t = T[-1] + h
             D = np.pad(D , ((0,1)), 'constant', constant_values= D_new )
             E = np.pad(E , ((0,1)), 'constant', constant_values= E_new )
             T = np.pad(T , ((0,1)), 'constant', constant_values= t )
-            
+
         else:
             M += 1
             s = 0.9  #as noted in lecture note, the value of s is few percent less than one
             h *= s* err**(-0.2)
-    
+
     if T[-1] < t_f:
         print('Failed to reach t_f')
         print('Last time step after',N_max ,'iterations =',T[-1] )
-        
-   
+
+
     print('N_max =',int(N_max))
     print('N =',N)
     print('M =',M)
@@ -111,8 +110,8 @@ T,D = runge_kutta(D0, E0, t_i, t_f, h0, N_max )
 plt.loglog(T,D)
 plt.xlabel('log Time(year)')
 plt.ylabel('log D')
-plt.savefig('ODE_3a_1.png')
-plt.show()
+plt.savefig('./Plots/ODE_3a_1.png')
+#plt.show()
 plt.close()
 
 D0 = 10.
@@ -127,8 +126,8 @@ T,D = runge_kutta(D0, E0, t_i, t_f, h0, N_max )
 plt.loglog(T,D)
 plt.xlabel('log Time(year)')
 plt.ylabel('log D')
-plt.savefig('ODE_3a_2.png')
-plt.show()
+plt.savefig('./Plots/ODE_3a_2.png')
+#plt.show()
 plt.close()
 
 D0 = 5.
@@ -143,14 +142,7 @@ T,D = runge_kutta(D0, E0, t_i, t_f, h0, N_max )
 plt.loglog(T,D)
 plt.xlabel('log Time(year)')
 plt.ylabel('log D')
-plt.savefig('ODE_3a_3.png')
-plt.show()
+plt.savefig('./Plots/ODE_3a_3.png')
+#plt.show()
 plt.close()
 
-	
-	
-	
-	
-	
-	
-	

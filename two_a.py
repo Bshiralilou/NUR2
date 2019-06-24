@@ -14,11 +14,11 @@ def Fplane(n, scale, size= 1024):
             #the variance at each point:
             if kj != 512 or ki != 512:
             # defining random number (a+ib)
-                sigma = (np.sqrt(((kj - 512 )/scale)**(2.) + ((ki - 512 )/scale)**(2.)) )**n   
+                sigma = (np.sqrt(((kj - 512 )/scale)**(2.) + ((ki - 512 )/scale)**(2.)) )**n
                 a, b = normal_dist(0., sigma, 1)
-                
+
             else:
-                sigma = (np.sqrt(((5e-6)/scale)**(2.) + ((5e-6)/scale)**(2.)) )**(0.5*n)   
+                sigma = (np.sqrt(((5e-6)/scale)**(2.) + ((5e-6)/scale)**(2.)) )**(0.5*n)
                 a, b = normal_dist(0., sigma, 1)
 
             #filling the  symmetric matrix:
@@ -30,41 +30,40 @@ def Fplane(n, scale, size= 1024):
             else:
                 antisym[ki, kj] = b[0]
                 antisym[kj, ki] = -b[0]
-            
+
     return sym + 1j * antisym
 
 #------Inverse fourier transformation
 
 # n = -1
-fourier = Fplane(-1., 10, size=1024)  
+fourier = Fplane(-1., 10, size=1024)
 real = fft.ifft2(fourier)
 plt.imshow( np.abs(real) )
 plt.colorbar()
 plt.xlabel('pixel number')
 plt.ylabel('pixel number')
-plt.savefig('fourier_2a_1.png')
-plt.show()
+plt.savefig('./Plots/fourier_2a_1.png')
+#plt.show()
 plt.close()
 
 # n = -2
-fourier = Fplane(-2., 10, size=1024)  
+fourier = Fplane(-2., 10, size=1024)
 real = fft.ifft2(fourier)
 plt.imshow( np.abs(real) )
 plt.colorbar()
 plt.xlabel('pixel number')
 plt.ylabel('pixel number')
-plt.savefig('fourier_2a_2.png')
-plt.show()
+plt.savefig('./Plots/fourier_2a_2.png')
+#plt.show()
 plt.close()
 
 # n = -3
-fourier = Fplane(-3., 10, size=1024)  
+fourier = Fplane(-3., 10, size=1024)
 real = fft.ifft2(fourier)
 plt.imshow( np.abs(real) )
 plt.colorbar()
 plt.xlabel('pixel number')
 plt.ylabel('pixel number')
-plt.savefig('fourier_2a_3.png')
-plt.show()
+plt.savefig('./Plots/fourier_2a_3.png')
+#plt.show()
 plt.close()
-    
